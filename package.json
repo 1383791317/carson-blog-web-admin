@@ -1,0 +1,29 @@
+{
+  "name": "vue3-ant-admin-admin",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --mode development",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "@wangeditor/editor-for-vue": "^5.1.12",
+    "ant-design-vue": "^4.1.2",
+    "axios": "^1.6.8",
+    "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "fast-glob": "^3.3.2",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "vite": "^5.1.6",
+    "vite-plugin-svg-icons": "^2.0.1"
+  }
+}
