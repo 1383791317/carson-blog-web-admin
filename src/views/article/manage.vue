@@ -1,11 +1,5 @@
 <template>
     <a-card>
-        <div class="table-button-group">
-            <div></div>
-            <div>
-                <a-button type="primary" @click="showDrawer">添加文章</a-button>
-            </div>
-        </div>
         <layoutTable :columns="columns" :tableRequest="getArticleList" :key="tableKey" :updateRow=true>
             <template #updateRow="{ column, record }">
                 <template v-if="column.dataIndex === 'tags'">
@@ -25,7 +19,6 @@
             <a-button style="margin-right: 8px" @click="onClose">取消</a-button>
             <a-button type="primary" @click="onClose">提交</a-button>
         </template>
-        sdfsdfdsf
     </a-drawer>
 </template>
 <script lang="ts" setup>

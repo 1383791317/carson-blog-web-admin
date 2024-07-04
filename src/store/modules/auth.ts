@@ -34,11 +34,11 @@ export const useUserAuthStore = defineStore(
         refresh_time: authTokenObject.refresh_time
       }
     }
-    const setToken = (token : TokenType) => {
+    const setToken = async(token : TokenType) => {
       localStorage.setItem('auth_token',JSON.stringify(token));
       tokenData.value = token
     };
-    const clearToken = () => {
+    const clearToken = async() => {
       localStorage.removeItem('auth_token');
       tokenData.value = {
         token: '',
@@ -50,7 +50,7 @@ export const useUserAuthStore = defineStore(
     const getToken = () => {
       return tokenData.value.token;
     };
-    const verfiyToken = () => {
+    const verfiyToken = async() => {
       if(!tokenData.value.token){
         return false;
       }
@@ -84,7 +84,7 @@ export const useUserAuthStore = defineStore(
         if (whiteNameList.some((n) => n === to.name)) {
           next();
         }else{
-          if (verfiyToken()) {
+          if (await verfiyToken()) {
             next()
           }else{
             next({ name: 'login', query: { redirect: to.fullPath }, replace: true });

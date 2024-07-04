@@ -8,19 +8,9 @@ import { whiteNameList } from './constant';
 const userAuthStore = useUserStoreWithOut();
 
 export const router = createRouter({
-  // process.env.BASE_URL
-  history: createWebHashHistory(''),
-  routes: routes.constantRoutes as RouteRecordRaw[],
+  history: createWebHashHistory(),
+  routes: routes.constantRoutes as any as RouteRecordRaw[],
 });
-
-// export function resetRouter() {
-//   router.getRoutes().forEach((route) => {
-//     const { name } = route;
-//     if (name && !whiteNameList.some((n) => n === name)) {
-//       router.hasRoute(name) && router.removeRoute(name);
-//     }
-//   });
-// }
 
 export async function setupRouter(app: App) {
   // 创建路由守卫
