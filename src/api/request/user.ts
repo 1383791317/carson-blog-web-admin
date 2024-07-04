@@ -17,4 +17,10 @@ export function authLogin(form:userType.AuthLogin) {
       },
     });
   }
+  export function logoutReq() {
+    return request({
+      url: '/logout',
+      method: 'get',
+    });
+  }
   

@@ -17,7 +17,6 @@
                         <div style="width: 100%;font-size: 13px;">{{ item.meta.title }}</div>
                     </div>
                 </div>
-                <!-- #hoverMenus -->
                 <a-layout-sider v-show="hoverMenus" class="layout-sider-two-hover" width="140px">
                     <a-menu :items="menuItemsHover" mode="inline" v-model:selected-keys="selectedKeys"
                         v-model:openKeys="openKeys" :style="{ height: '100%', borderRight: 0 }"
@@ -31,9 +30,19 @@
                         <a-typography-title :level="3" class="layout-header-flex-title">Carson
                             Admin</a-typography-title>
                         <a-flex align="flex-end">
-                            <div class="header-user">
-                                <a-avatar src="https://www.antdv.com/assets/logo.1ef800a8.svg"/>
+                            <div class="header-user" @mouseover="() => headerUserCard = true"
+                                @mouseout="() => headerUserCard = false">
+                                <a-avatar src="https://www.antdv.com/assets/logo.1ef800a8.svg" />
                                 <a-text style="font-size: 16px;">carson 0945</a-text>
+                                <a-card v-show="headerUserCard" size="small" class="hader-user-card"
+                                    :bodyStyle="{ padding: '0px' }">
+                                    <p>
+                                        <UserOutlined /> 个人中心
+                                    </p>
+                                    <p @click="logout">
+                                        <LogoutOutlined /> 退出登录
+                                    </p>
+                                </a-card>
                             </div>
                         </a-flex>
                     </a-flex>
@@ -59,8 +68,13 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { type MenuProps } from 'ant-design-vue';
+import { message, type MenuProps } from 'ant-design-vue';
 import router from '@/router/route-nodes'
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons-vue';
+import { logoutReq } from '@/api/request/user';
+import { useUserAuthStore } from '@/store/modules/auth';
+
+const headerUserCard = ref(false);
 const routerF = useRouter();
 //当前路由
 const currentRoute = useRoute();
@@ -142,6 +156,15 @@ const hideMenu = (event: MouseEvent): void => {
 const hideMenuHover = () => {
     hoverMenus.value = false;
     menuItemsHover.value = []
+}
+const logout = () => {
+    logoutReq().then(({ isSuccess }) => {
+        if (isSuccess) {
+            message.success('退出成功')
+            useUserAuthStore().clearToken()
+            routerF.push({ name: 'login' })
+        }
+    })
 }
 watch(() => currentRoute.name, () => {
     for (const item of parentMenus.value) {

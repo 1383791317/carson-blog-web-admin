@@ -88,6 +88,23 @@
     height: 100%;
     padding: 0 5px;
     &:hover{
-        background-color: #333333;
+        cursor: pointer;
+        background-color: #f9f9f9;
+    }
+}
+.hader-user-card{
+    color: #595959;
+    width: 150px;
+    position: absolute !important;
+    top: 64px;
+    right: 20px;
+    padding: 0  !important;
+    text-align: center;
+    p{
+        margin: 5px 0;
+        padding: 6px 0;
+        &:hover{
+            background-color: #e6f7ff;
+        }
     }
 }

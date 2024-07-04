@@ -95,7 +95,8 @@ export const useUserAuthStore = defineStore(
       getToken,
       setToken,
       userLogin,
-      userAuth
+      userAuth,
+      clearToken
     }
   })
 // 在组件setup函数外使用
