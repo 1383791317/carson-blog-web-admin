@@ -1,85 +1,5 @@
-<style scoped>
-.layout-left-menu {
-    display: flex;
-    justify-content: center;
-    height: 64px;
-    color: #666666
-}
-
-.layout-left-menu-content {
-    text-align: center;
-    margin: auto;
-}
-
-.layout-left-menu-content-icon {
-    width: 100%;
-    font-size: 20px;
-}
-
-.layout-left-menu:hover {
-    background-color: #ececec;
-    color: #333333;
-}
-
-.layout-left-menu-label:hover {
-    background-color: #ececec;
-    color: #333333;
-}
-
-.top-left-menu-lable-selected {
-    border-right: 3px solid #1890ff;
-}
-
-.menu-items-mouseover {
-    position: absolute;
-    display: flex;
-    left: 80px;
-    flex-grow: 1;
-    height: 100%;
-    padding-top: 64px;
-}
-
-.layout-header {
-    height: 64px;
-    line-height: 64px;
-    border-bottom: 1px solid #e8e8e8;
-    background-color: #ffffff;
-    z-index: 1;
-}
-
-.layout-sider {
-    height: 100vh;
-    background-color: #ffffff;
-    border-right: 1px solid #e8e8e8;
-}
-
-.layout-sider-two {
-    background-color: #ffffff;
-    border-right: 1px solid #e8e8e8;
-}
-
-.layout-sider-two-hover {
-    position: absolute;
-    top: 0;
-    left: 74px;
-    background-color: #ffffff;
-    border-right: 1px solid #e8e8e8;
-    height: 100%;
-    padding-top: 64px;
-    border-left: 1px solid #e8e8e8;
-    z-index: 1;
-}
-
-.layout-footer {
-    text-align: center;
-}
-
-.top-left-logo {
-    height: 64px;
-    display: flex;
-    justify-content: center;
-    align-items: center
-}
+<style lang="scss">
+@import '@/assets/css/page/basic.scss';
 </style>
 <template>
     <a-space direction="vertical" :style="{ width: '100%' }" :size="[0, 48]">
@@ -88,7 +8,7 @@
             <a-layout-sider class="layout-sider" width="75px">
                 <div class="top-left-logo">
                 </div>
-                <div class="layout-left-menu ant-menu-item-selected" v-for="(item, index) in parentMenus"
+                <div class="layout-left-menu ant-menu-item-selected" style="" v-for="(item, index) in parentMenus"
                     @mouseenter="onMenu(item.children)" @mouseleave="hideMenu">
                     <div class="layout-left-menu-content" :style="item.checked ? { color: '#1677ff' } : ''">
                         <div class="layout-left-menu-content-icon">
@@ -97,6 +17,7 @@
                         <div style="width: 100%;font-size: 13px;">{{ item.meta.title }}</div>
                     </div>
                 </div>
+                <!-- #hoverMenus -->
                 <a-layout-sider v-show="hoverMenus" class="layout-sider-two-hover" width="140px">
                     <a-menu :items="menuItemsHover" mode="inline" v-model:selected-keys="selectedKeys"
                         v-model:openKeys="openKeys" :style="{ height: '100%', borderRight: 0 }"
@@ -105,27 +26,30 @@
                 </a-layout-sider>
             </a-layout-sider>
             <a-layout>
-                <a-layout-header class="layout-header">
-                    <a-typography-title :level="3" style="margin: 0;display: inline-block;">Carson Admin</a-typography-title>
-                        <a-avatar src="https://www.antdv.com/assets/logo.1ef800a8.svg" />
-  <a-button size="small" :style="{ margin: '0 16px', verticalAlign: 'middle' }">
-    ChangeUser
-  </a-button>
-  <a-button size="small" :style="{ verticalAlign: 'middle' }">
-    ChangeGap
-  </a-button>
+                <a-layout-header class="layout-header" style="padding-right: 18px;">
+                    <a-flex justify="space-between" align="flex-start" class="layout-header-flex">
+                        <a-typography-title :level="3" class="layout-header-flex-title">Carson
+                            Admin</a-typography-title>
+                        <a-flex align="flex-end">
+                            <div class="header-user">
+                                <a-avatar src="https://www.antdv.com/assets/logo.1ef800a8.svg"/>
+                                <a-text style="font-size: 16px;">carson 0945</a-text>
+                            </div>
+                        </a-flex>
+                    </a-flex>
                 </a-layout-header>
                 <a-layout>
                     <a-layout-sider class="layout-sider-two" width="140px">
-                        <a-menu :items="menuItems" mode="inline" v-model:selected-keys="selectedKeys" v-model:openKeys="openKeys"
-                            :style="{ height: '100%', borderRight: 0 }" @click="clickMenuItem">
+                        <a-menu :items="menuItems" mode="inline" v-model:selected-keys="selectedKeys"
+                            v-model:openKeys="openKeys" :style="{ height: '100%', borderRight: 0 }"
+                            @click="clickMenuItem">
                         </a-menu>
                     </a-layout-sider>
                     <a-layout-content>
                         <div style="margin:15px 10px;min-height: 75vh">
                             <RouterView />
                         </div>
-                        <a-layout-footer class="layout-footer">Footer</a-layout-footer>
+                        <!-- <a-layout-footer class="layout-footer">Footer</a-layout-footer> -->
                     </a-layout-content>
                 </a-layout>
             </a-layout>
@@ -137,7 +61,6 @@ import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { type MenuProps } from 'ant-design-vue';
 import router from '@/router/route-nodes'
-
 const routerF = useRouter();
 //当前路由
 const currentRoute = useRoute();
@@ -218,7 +141,7 @@ const hideMenu = (event: MouseEvent): void => {
 }
 const hideMenuHover = () => {
     hoverMenus.value = false;
-     menuItemsHover.value = []
+    menuItemsHover.value = []
 }
 watch(() => currentRoute.name, () => {
     for (const item of parentMenus.value) {

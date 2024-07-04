@@ -27,11 +27,11 @@
                 style="position: absolute; right: 20px; top: 20px;">
                 保存并发布
             </a-button>
-            <a-button html-type="submit" @click.prevent="onSubmit(2)"
+            <!-- <a-button html-type="submit" @click.prevent="onSubmit(2)"
                 style="position: absolute; right: 128px; top: 20px;color: #4096ff; border-color: #4096ff;">
                 仅保存
-            </a-button>
-            <a-button html-type="submit" @click="resetFields" style="position: absolute; right: 210px; top: 20px;">
+            </a-button> -->
+            <a-button html-type="submit" @click="resetFields" style="position: absolute; right: 128px; top: 20px;">
                 重置
             </a-button>
         </a-form>
