@@ -105,7 +105,16 @@
                 </a-layout-sider>
             </a-layout-sider>
             <a-layout>
-                <a-layout-header class="layout-header">Header</a-layout-header>
+                <a-layout-header class="layout-header">
+                    <a-typography-title :level="3" style="margin: 0;display: inline-block;">Carson Admin</a-typography-title>
+                        <a-avatar src="https://www.antdv.com/assets/logo.1ef800a8.svg" />
+  <a-button size="small" :style="{ margin: '0 16px', verticalAlign: 'middle' }">
+    ChangeUser
+  </a-button>
+  <a-button size="small" :style="{ verticalAlign: 'middle' }">
+    ChangeGap
+  </a-button>
+                </a-layout-header>
                 <a-layout>
                     <a-layout-sider class="layout-sider-two" width="140px">
                         <a-menu :items="menuItems" mode="inline" v-model:selected-keys="selectedKeys" v-model:openKeys="openKeys"

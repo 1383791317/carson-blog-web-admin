@@ -7,10 +7,11 @@ import Antd from 'ant-design-vue'
 const app = createApp(App);
 
 async function setupApp() {
-  setupStore(app)
-
-  app.use(Antd)
   await setupRouter(app);
+
+  setupStore(app)
+  app.use(Antd)
+ 
   app.mount('#app');
 }
 

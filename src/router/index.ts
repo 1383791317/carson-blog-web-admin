@@ -14,7 +14,7 @@ export const router = createRouter({
 
 export async function setupRouter(app: App) {
   // 创建路由守卫
-  userAuthStore.userAuth(router, whiteNameList)
+  await userAuthStore.userAuth(router, whiteNameList)
   app.use(router);
 
   // 路由准备就绪后挂载APP实例

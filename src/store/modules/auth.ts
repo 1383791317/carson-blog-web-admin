@@ -34,11 +34,11 @@ export const useUserAuthStore = defineStore(
         refresh_time: authTokenObject.refresh_time
       }
     }
-    const setToken = async(token : TokenType) => {
+    const setToken = (token : TokenType) => {
       localStorage.setItem('auth_token',JSON.stringify(token));
       tokenData.value = token
     };
-    const clearToken = async() => {
+    const clearToken = () => {
       localStorage.removeItem('auth_token');
       tokenData.value = {
         token: '',
@@ -59,15 +59,14 @@ export const useUserAuthStore = defineStore(
         return false;
       }
       if(tokenData.value.expire_time * 1000 < Date.now()){
-        refreshToken(tokenData.value.refresh_token).then(async ({isSuccess,apiResultData}) => {
-          if(isSuccess){
-            setToken(apiResultData as TokenType)
-            return true
-           }else{
-            message.error('刷新token失败，请重新登录')
-            return false;
-           }
-        })
+        const res = await refreshToken(tokenData.value.refresh_token);
+        if(res.isSuccess){
+          setToken(res.apiResultData as TokenType)
+          return true
+         }else{
+          message.error('刷新token失败，请重新登录')
+          return false;
+         }
       }
       return true;
     };
