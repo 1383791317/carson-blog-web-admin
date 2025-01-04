@@ -5,3 +5,7 @@ export interface AuthLogin {
   export interface RefreshToken {
     token: string;
   }
+  export interface UserInfo {
+    username: string;
+    account: string;
+  }

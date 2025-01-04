@@ -40,7 +40,6 @@
 <script lang="ts" setup>
 import '@wangeditor/editor/dist/css/style.css';
 import { ref, reactive, toRaw, onMounted, shallowRef } from 'vue';
-import { message as $message } from 'ant-design-vue';
 import { getCategorySelect, getTagSelect, articleSave, articleDetail, updalodImage } from '@/api/request/article';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 import { Form } from 'ant-design-vue';

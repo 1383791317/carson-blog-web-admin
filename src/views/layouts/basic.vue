@@ -27,13 +27,13 @@
             <a-layout>
                 <a-layout-header class="layout-header" style="padding-right: 18px;">
                     <a-flex justify="space-between" align="flex-start" class="layout-header-flex">
-                        <a-typography-title :level="3" class="layout-header-flex-title">Carson
+                        <a-typography-title :level="3" class="layout-header-flex-title">Carson Blog
                             Admin</a-typography-title>
                         <a-flex align="flex-end">
                             <div class="header-user" @mouseover="() => headerUserCard = true"
                                 @mouseout="() => headerUserCard = false">
                                 <a-avatar src="https://www.antdv.com/assets/logo.1ef800a8.svg" />
-                                <a-text style="font-size: 16px;">carson 0945</a-text>
+                                <a-text style="font-size: 16px;">&nbsp;&nbsp;{{userInfo.username}}</a-text>
                                 <a-card v-show="headerUserCard" size="small" class="hader-user-card"
                                     :bodyStyle="{ padding: '0px' }">
                                     <p>
@@ -71,8 +71,9 @@ import { useRoute, useRouter } from 'vue-router';
 import { message, type MenuProps } from 'ant-design-vue';
 import router from '@/router/route-nodes'
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons-vue';
-import { logoutReq } from '@/api/request/user';
+import { logoutReq,getUserInfoReq } from '@/api/request/user';
 import { useUserAuthStore } from '@/store/modules/auth';
+import { UserInfo } from '@/api/type/user';
 
 const headerUserCard = ref(false);
 const routerF = useRouter();
@@ -84,6 +85,13 @@ const hoverMenus = ref(false)
 const menuItems = ref([])
 const menuItemsHover = ref([])
 const parentMenus = ref(router.handlerRoutes)
+const userInfo = ref<UserInfo>({
+    username: "",
+    account:""
+})
+getUserInfoReq().then(({ apiResultData }: { apiResultData: UserInfo }) => {
+    userInfo.value = { ...apiResultData };
+})
 const findMatchingChildRoute = (currentRouteName, routes) => {
     for (const item of routes) {
         if (item.children) {

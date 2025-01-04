@@ -1,7 +1,7 @@
 <template>
     <div class="login-box">
         <div class="login-logo">
-            <h1 class="mb-0 ml-2 text-3xl font-bold">Antdv Admin</h1>
+            <h1 class="mb-0 ml-2 text-3xl font-bold">Carson 播客</h1>
         </div>
         <a-form :model="formState" ref="formRef" :rules="formRules">
             <a-form-item name="account">
@@ -43,8 +43,8 @@ const formRules = {
     password: [{ required: true, message: '请输入密码' }],
 }
 const formState: AuthLogin = reactive({
-    account: 'admin',
-    password: '123456',
+    account: '',
+    password: '',
 });
 const onSubmit = () => {
     formRef.value

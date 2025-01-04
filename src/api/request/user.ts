@@ -23,4 +23,10 @@ export function authLogin(form:userType.AuthLogin) {
       method: 'get',
     });
   }
+  export function getUserInfoReq() {
+    return request({
+      url: '/userinfo',
+      method: 'get',
+    });
+  }
   

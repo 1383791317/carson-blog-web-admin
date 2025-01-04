@@ -80,7 +80,7 @@ const constantRoutes: ConstantRoutesT[] = [
   },
   {
     path: '/',
-    name: 'main',
+    name: 'main', 
     meta: {title:'首页'},
     component: () => import('@/views/layouts/basic.vue'),
     redirect: '/index/dashboard',

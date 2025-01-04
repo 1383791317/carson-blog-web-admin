@@ -60,7 +60,7 @@ const authorizationHeader = () => {
 interface resultType {
   error: any;
   response: object;
-  apiResultData: Array<API.tableType> | object;
+  apiResultData: any;
   apiResult: API.ResOp | object;
   isSuccess: boolean
 }
